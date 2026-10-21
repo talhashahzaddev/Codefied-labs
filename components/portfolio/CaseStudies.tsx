@@ -1,8 +1,7 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { HiTrendingUp, HiClock, HiUsers, HiCurrencyDollar } from 'react-icons/hi'
+import Link from 'next/link'
+import { HiTrendingUp, HiClock, HiUsers, HiCurrencyDollar, HiArrowRight } from 'react-icons/hi'
+import Reveal from '@/components/ui/Reveal'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 const industries = [
   {
@@ -11,8 +10,7 @@ const industries = [
     description: 'Secure, compliant solutions for banking, insurance, and fintech companies.',
     impact: '$2.5B+ transactions processed',
     icon: HiCurrencyDollar,
-    color: 'text-green-600',
-    bgColor: 'bg-green-50',
+    tile: 'from-emerald-400 to-emerald-600',
   },
   {
     name: 'Healthcare',
@@ -20,8 +18,7 @@ const industries = [
     description: 'HIPAA-compliant systems improving patient care and operational efficiency.',
     impact: '500K+ patients served',
     icon: HiUsers,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
+    tile: 'from-primary-400 to-primary-600',
   },
   {
     name: 'E-Commerce',
@@ -29,8 +26,7 @@ const industries = [
     description: 'Scalable platforms driving online sales and customer engagement.',
     impact: '10M+ orders processed',
     icon: HiTrendingUp,
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-50',
+    tile: 'from-iris-400 to-iris-600',
   },
   {
     name: 'Manufacturing',
@@ -38,137 +34,98 @@ const industries = [
     description: 'IoT and automation solutions optimizing production and supply chain.',
     impact: '35% efficiency increase',
     icon: HiClock,
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
+    tile: 'from-amber-400 to-orange-500',
   },
 ]
 
 const metrics = [
-  {
-    label: 'Average Project ROI',
-    value: '340%',
-    description: 'Return on investment within 12 months',
-  },
-  {
-    label: 'Time to Market',
-    value: '45%',
-    description: 'Faster delivery compared to traditional development',
-  },
-  {
-    label: 'Client Retention',
-    value: '94%',
-    description: 'Long-term partnerships with satisfied clients',
-  },
-  {
-    label: 'Performance Improvement',
-    value: '60%',
-    description: 'Average system performance enhancement',
-  },
+  { label: 'Average Project ROI', value: '340%', description: 'Return on investment within 12 months' },
+  { label: 'Time to Market', value: '45%', description: 'Faster delivery compared to traditional development' },
+  { label: 'Client Retention', value: '94%', description: 'Long-term partnerships with satisfied clients' },
+  { label: 'Performance Improvement', value: '60%', description: 'Average system performance enhancement' },
 ]
 
-export default function CaseStudies() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
+const maxProjects = Math.max(...industries.map((i) => i.projects))
 
+export default function CaseStudies() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Industry Expertise
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We've delivered exceptional results across diverse industries, 
-            understanding unique challenges and regulatory requirements.
-          </p>
-        </motion.div>
+    <section aria-labelledby="industries-title" className="section bg-paper">
+      <div className="container-page">
+        <SectionHeader
+          id="industries-title"
+          title="Industry Expertise"
+          description="We've delivered exceptional results across diverse industries, understanding unique challenges and regulatory requirements."
+        />
 
         {/* Industries */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((industry, index) => (
-            <motion.div
-              key={industry.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-            >
-              <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${industry.bgColor} mb-4`}>
-                <industry.icon className={`h-6 w-6 ${industry.color}`} />
-              </div>
-              
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{industry.name}</h3>
-              <p className="text-gray-600 text-sm mb-4 leading-relaxed">{industry.description}</p>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-500">Projects</span>
-                  <span className="font-semibold text-gray-900">{industry.projects}</span>
+            <Reveal as="li" key={industry.name} delay={index * 0.06} className="h-full">
+              <article className="group flex h-full flex-col rounded-[28px] border border-slate-200/80 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+                <span className="relative inline-flex h-12 w-12">
+                  <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-2xl bg-slate-200" />
+                  <span className={`relative inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${industry.tile} text-white`}>
+                    <industry.icon aria-hidden="true" className="h-6 w-6" />
+                  </span>
+                </span>
+                <h3 className="mt-6 text-lg font-semibold text-slate-950">{industry.name}</h3>
+                <p className="mt-2 flex-1 text-sm leading-6 text-slate-600">{industry.description}</p>
+
+                <div className="mt-6 border-t border-slate-100 pt-5">
+                  <div className="flex items-baseline justify-between text-sm">
+                    <span className="text-slate-500">Projects</span>
+                    <span className="font-display text-lg font-semibold text-slate-950">{industry.projects}</span>
+                  </div>
+                  <div aria-hidden="true" className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+                    <div
+                      className={`h-full rounded-full bg-gradient-to-r ${industry.tile}`}
+                      style={{ width: `${(industry.projects / maxProjects) * 100}%` }}
+                    />
+                  </div>
+                  <p className="mt-4 text-sm font-medium text-primary-700">{industry.impact}</p>
                 </div>
-                <div className="text-sm font-medium text-primary-600">{industry.impact}</div>
-              </div>
-            </motion.div>
+              </article>
+            </Reveal>
           ))}
-        </div>
+        </ul>
 
         {/* Metrics */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-2xl p-8 shadow-lg"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-            Measurable Impact
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-3xl font-bold text-primary-600 mb-2">{metric.value}</div>
-                <div className="font-semibold text-gray-900 mb-1">{metric.label}</div>
-                <div className="text-sm text-gray-600">{metric.description}</div>
-              </motion.div>
-            ))}
+        <Reveal className="mt-16">
+          <div className="relative isolate overflow-hidden rounded-[32px] bg-ink-900 px-6 py-10 text-white shadow-deep sm:px-10 sm:py-12">
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid-dark opacity-70" />
+            <div aria-hidden="true" className="absolute -right-20 -top-20 -z-10 h-72 w-72 rounded-full bg-primary-600/30 blur-3xl" />
+            <h3 className="text-2xl font-semibold">Measurable Impact</h3>
+            <dl className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/10">
+              {metrics.map((metric) => (
+                <div key={metric.label} className="flex flex-col lg:px-8 lg:first:pl-0 lg:last:pr-0">
+                  <dt className="order-2 mt-2 font-semibold">{metric.label}</dt>
+                  <dd className="order-1 font-display text-4xl font-semibold text-transparent bg-gradient-to-r from-sky-300 to-iris-300 bg-clip-text">
+                    {metric.value}
+                  </dd>
+                  <dd className="order-3 mt-1 text-sm leading-6 text-slate-400">{metric.description}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </motion.div>
+        </Reveal>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <div className="bg-primary-600 rounded-2xl p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Join Our Success Stories?</h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Let's discuss how we can help transform your business with a custom software solution 
-              tailored to your unique needs and industry requirements.
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-            >
+        {/* Call to action */}
+        <Reveal className="mt-6">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-[32px] border border-primary-100 bg-gradient-to-r from-primary-50 via-white to-iris-300/20 p-8 sm:p-10 lg:flex-row lg:items-center">
+            <div className="max-w-2xl">
+              <h3 className="text-2xl font-semibold text-slate-950">Ready to Join Our Success Stories?</h3>
+              <p className="mt-2 leading-7 text-slate-600">
+                Let&apos;s discuss how we can help transform your business with a custom software solution tailored to
+                your unique needs and industry requirements.
+              </p>
+            </div>
+            <Link href="/contact" className="btn-primary group shrink-0">
               Start Your Project
-            </a>
+              <HiArrowRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )
-} 
+}

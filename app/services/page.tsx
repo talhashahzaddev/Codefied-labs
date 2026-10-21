@@ -4,6 +4,7 @@ import ServicesList from '@/components/services/ServicesList'
 import ClientShowcase from '@/components/services/ClientShowcase'
 import ProcessSection from '@/components/services/ProcessSection'
 import TechStack from '@/components/services/TechStack'
+import CTA from '@/components/CTA'
 
 export const metadata: Metadata = {
   title: 'Custom Software Development Services',
@@ -25,9 +26,9 @@ export default function ServicesPage() {
     <div className="min-h-screen">
       <ServicesHero />
       <ServicesList />
-     
       <ProcessSection />
       <TechStack />
+      <CTA />
     </div>
   )
 } 

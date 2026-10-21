@@ -1,10 +1,35 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import localFont from 'next/font/local'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Providers from '@/components/ui/Providers'
 
-const inter = Inter({ subsets: ['latin'] })
+// Self-hosted variable fonts (SIL Open Font License, see app/fonts/LICENSE-*.txt)
+const inter = localFont({
+  src: './fonts/inter-latin-variable.woff2',
+  variable: '--font-inter',
+  weight: '100 900',
+  display: 'swap',
+})
+
+const sora = localFont({
+  src: './fonts/sora-latin-variable.woff2',
+  variable: '--font-sora',
+  weight: '100 800',
+  display: 'swap',
+})
+
+const mono = localFont({
+  src: './fonts/jetbrains-mono-latin-variable.woff2',
+  variable: '--font-mono',
+  weight: '100 800',
+  display: 'swap',
+})
+
+export const viewport: Viewport = {
+  themeColor: '#0B1024',
+}
 
 export const metadata: Metadata = {
   title: {
@@ -77,15 +102,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} antialiased`}>
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </div>
+    <html lang="en" className={`${inter.variable} ${sora.variable} ${mono.variable}`}>
+      <body className="font-sans antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink-900 focus:shadow-lg"
+        >
+          Skip to content
+        </a>
+        <Providers>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main id="main-content" className="flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   )

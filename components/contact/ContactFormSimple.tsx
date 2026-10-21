@@ -108,7 +108,7 @@ export default function ContactFormSimple() {
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">Message Sent Successfully! ✅</h3>
           <p className="text-gray-600 mb-6">
-            Thank you for contacting us! We've received your message and will get back to you within 24 hours.
+            Thank you for contacting us! We&apos;ve received your message and will get back to you within 24 hours.
           </p>
           <div className="text-sm text-gray-500 mb-6">
             Email sent to: iamabdalhannan@gmail.com

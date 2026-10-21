@@ -40,7 +40,7 @@ export default function ClientShowcase() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">We're Featured In</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">We&apos;re Featured In</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
             {featuredIn.map((publication, index) => (
               <motion.div

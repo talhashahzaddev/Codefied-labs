@@ -1,134 +1,112 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import Image from 'next/image'
 import Link from 'next/link'
-import { HiArrowRight } from 'react-icons/hi'
+import { HiArrowRight, HiCheck } from 'react-icons/hi'
+import Reveal from '@/components/ui/Reveal'
+import SectionHeader from '@/components/ui/SectionHeader'
+import TiltCard from '@/components/ui/TiltCard'
 
 const services = [
   {
     title: 'Mobile Apps',
-    description: 'We create high-quality mobile apps that bring profit. From idea validation to successful launch.',
-    features: ['iOS app development', 'Android app development', 'Cross-platform app development', 'Flutter development'],
-    image: '/api/placeholder/600/400',
+    description: 'We create high-quality mobile apps that bring profit. From idea validation to a successful launch.',
+    features: ['iOS app development', 'Android app development', 'Cross-platform apps', 'Flutter development'],
+    image: '/images/services/mobile-apps.svg',
+    imageAlt: 'Isometric illustration of two smartphone app screens standing on a platform',
+    label: 'iOS, Android and Flutter',
     href: '/services#mobile-apps',
   },
   {
     title: 'Web Solutions',
-    description: 'We deliver web solutions from simple websites to engaging applications. We build regular web apps, as well as SPA and PWA.',
+    description: 'From polished websites to engaging applications, we build responsive web experiences for every screen.',
     features: ['Front-end development', 'Progressive Web Apps', 'Single Page Applications', 'Responsive websites'],
-    image: '/api/placeholder/600/400',
+    image: '/images/services/web-solutions.svg',
+    imageAlt: 'Isometric illustration of a responsive website shown on a browser window and a phone',
+    label: 'Websites, apps and PWAs',
     href: '/services#web-solutions',
   },
   {
     title: 'Custom Software',
-    description: 'Custom software gives you full control over your business processes and cuts burdening costs.',
-    features: ['Enterprise Applications', 'Business Automation', 'System Integration', 'Legacy Modernization'],
-    image: '/api/placeholder/600/400',
+    description: 'Take control of your business processes with software designed around the way your team works.',
+    features: ['Enterprise applications', 'Business automation', 'System integration', 'Legacy modernization'],
+    image: '/images/services/custom-software.svg',
+    imageAlt: 'Isometric illustration of an analytics dashboard connected to automated workflow steps',
+    label: 'Built around your business',
     href: '/services#custom-software',
   },
 ]
 
 export default function Services() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Core Services
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From concept to deployment, we provide comprehensive software development services 
-            that transform your vision into powerful digital solutions.
-          </p>
-        </motion.div>
+    <section aria-labelledby="core-services-title" className="section overflow-hidden bg-paper">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid-light mask-radial opacity-70" />
 
-        <div className="space-y-20">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-              }`}
-            >
-              <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
-                  <div className="aspect-w-3 aspect-h-2 bg-gradient-to-br from-primary-500 to-blue-600">
-                    <div className="flex items-center justify-center">
-                      <div className="text-white text-6xl font-bold opacity-20">
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+      <div className="container-page relative">
+        <SectionHeader
+          id="core-services-title"
+          title="Our Core Services"
+          description="From concept to deployment, we provide comprehensive software development services that transform your vision into powerful digital solutions."
+        />
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {services.map((service, index) => {
+            // The last card spans both columns on tablets, so it switches to a side-by-side layout there.
+            const wide = index === services.length - 1
+            return (
+            <Reveal key={service.title} delay={index * 0.08} className={wide ? 'md:col-span-2 xl:col-span-1' : ''}>
+              <TiltCard className={`group flex h-full flex-col overflow-hidden ${wide ? 'md:flex-row xl:flex-col' : ''} rounded-[28px] border border-slate-200/80 bg-white shadow-soft transition-shadow duration-500 hover:shadow-lift`}>
+                <div
+                  className={`relative aspect-[16/10] overflow-hidden border-b border-slate-100 ${
+                    wide ? 'md:aspect-auto md:min-h-[320px] md:w-1/2 md:border-b-0 md:border-r xl:aspect-[16/10] xl:min-h-0 xl:w-full xl:border-b xl:border-r-0' : ''
+                  }`}
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    sizes="(min-width: 1280px) 400px, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm backdrop-blur">
+                    {service.label}
+                  </span>
                 </div>
-              </div>
 
-              <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                      {service.title}
-                    </h3>
-                    <p className="text-lg text-gray-600 leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
+                <div className={`flex flex-1 flex-col p-6 sm:p-7 ${wide ? 'md:justify-center xl:justify-start' : ''}`}>
+                  <h3 className="text-2xl font-semibold text-slate-950">{service.title}</h3>
+                  <p className="mt-3 text-[15px] leading-7 text-slate-600">{service.description}</p>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <ul className="mt-6 flex flex-wrap gap-2">
                     {service.features.map((feature) => (
-                      <div
-                        key={feature}
-                        className="flex items-center space-x-2 text-sm text-gray-700"
-                      >
-                        <div className="w-2 h-2 bg-primary-600 rounded-full"></div>
-                        <span>{feature}</span>
-                      </div>
+                      <li key={feature} className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 py-1 pl-1.5 pr-3 text-[13px] text-slate-700">
+                        <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700">
+                          <HiCheck aria-hidden="true" className="h-3 w-3" />
+                        </span>
+                        {feature}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
 
                   <Link
                     href={service.href}
-                    className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-semibold group"
+                    className="group/link mt-auto inline-flex items-center gap-2 pt-7 text-sm font-semibold text-primary-700 transition-colors hover:text-primary-900"
                   >
-                    <span>Learn More</span>
-                    <HiArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    Learn more<span className="sr-only"> about {service.title}</span>
+                    <HiArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
                   </Link>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </TiltCard>
+            </Reveal>
+            )
+          })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <Link
-            href="/services"
-            className="inline-flex items-center justify-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            Explore All Services
-            <HiArrowRight className="ml-2 h-5 w-5" />
+        <Reveal className="mt-12 flex justify-center sm:mt-14">
+          <Link href="/services" className="btn-primary group">
+            Explore all services
+            <HiArrowRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </Link>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )
-} 
+}

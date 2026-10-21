@@ -20,10 +20,13 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <ContactHero />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-        <ContactForm />
-        <ContactInfo />
-      </div>
+      <section aria-label="Contact form and details" className="relative bg-paper py-16 sm:py-20 lg:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-grid-light mask-radial opacity-60" />
+        <div className="container-page relative grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+          <ContactForm />
+          <ContactInfo />
+        </div>
+      </section>
     </div>
   )
 } 

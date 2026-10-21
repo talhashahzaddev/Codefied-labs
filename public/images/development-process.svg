@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="44" y1="31" x2="742" y2="479" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FF"/>
+      <stop offset="1" stop-color="#EDE9FE"/>
+    </linearGradient>
+    <linearGradient id="line" x1="140" y1="248" x2="661" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset=".5" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <filter id="shadow" x="87" y="100" width="633" height="318" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="12"/>
+      <feGaussianBlur stdDeviation="12"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.14 0 0 0 0 0.2 0 0 0 0 0.4 0 0 0 0.12 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="28" fill="url(#bg)"/>
+  <circle cx="104" cy="91" r="43" fill="#fff" fill-opacity=".6"/>
+  <circle cx="705" cy="399" r="61" fill="#fff" fill-opacity=".55"/>
+  <path d="M158 247h485" stroke="url(#line)" stroke-width="7" stroke-linecap="round"/>
+  <path d="m633 236 16 11-16 11" stroke="#818CF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#shadow)">
+    <rect x="97" y="151" width="104" height="181" rx="17" fill="#fff"/>
+    <rect x="223" y="151" width="104" height="181" rx="17" fill="#fff"/>
+    <rect x="349" y="151" width="104" height="181" rx="17" fill="#fff"/>
+    <rect x="475" y="151" width="104" height="181" rx="17" fill="#fff"/>
+    <rect x="601" y="151" width="104" height="181" rx="17" fill="#fff"/>
+  </g>
+  <g>
+    <circle cx="149" cy="211" r="29" fill="#DBEAFE"/>
+    <path d="M149 193v3m0 30v3m18-18h-3m-30 0h-3m31-13-2 2m-22 22-2 2m26 0-2-2m-22-22-2-2" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="149" cy="211" r="10" stroke="#2563EB" stroke-width="2.5"/>
+    <rect x="121" y="256" width="56" height="6" rx="3" fill="#475569"/>
+    <rect x="128" y="269" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="122" y="291" width="54" height="18" rx="9" fill="#EFF6FF"/>
+    <text x="149" y="304" fill="#2563EB" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">PLAN</text>
+  </g>
+  <g>
+    <circle cx="275" cy="211" r="29" fill="#EDE9FE"/>
+    <rect x="261" y="198" width="28" height="22" rx="3" stroke="#7C3AED" stroke-width="2.5"/>
+    <path d="M261 204h28m-18 16v7m8-7v7m-13 0h18" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="247" y="256" width="56" height="6" rx="3" fill="#475569"/>
+    <rect x="254" y="269" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="248" y="291" width="54" height="18" rx="9" fill="#F5F3FF"/>
+    <text x="275" y="304" fill="#7C3AED" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">DESIGN</text>
+  </g>
+  <g>
+    <circle cx="401" cy="211" r="29" fill="#DBEAFE"/>
+    <path d="m391 202-9 9 9 9m20-18 9 9-9 9m-5-25-9 32" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="373" y="256" width="56" height="6" rx="3" fill="#475569"/>
+    <rect x="380" y="269" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="374" y="291" width="54" height="18" rx="9" fill="#EFF6FF"/>
+    <text x="401" y="304" fill="#2563EB" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">BUILD</text>
+  </g>
+  <g>
+    <circle cx="527" cy="211" r="29" fill="#DCFCE7"/>
+    <path d="m516 211 8 8 15-17" stroke="#16A34A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="499" y="256" width="56" height="6" rx="3" fill="#475569"/>
+    <rect x="506" y="269" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="500" y="291" width="54" height="18" rx="9" fill="#F0FDF4"/>
+    <text x="527" y="304" fill="#16A34A" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">LAUNCH</text>
+  </g>
+  <g>
+    <circle cx="653" cy="211" r="29" fill="#EDE9FE"/>
+    <path d="M653 194v6m0 22v6m17-17h-6m-22 0h-6m29-12-4 4m-16 16-4 4m24 0-4-4m-16-16-4-4" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="653" cy="211" r="10" stroke="#7C3AED" stroke-width="2.5"/>
+    <rect x="625" y="256" width="56" height="6" rx="3" fill="#475569"/>
+    <rect x="632" y="269" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="626" y="291" width="54" height="18" rx="9" fill="#F5F3FF"/>
+    <text x="653" y="304" fill="#7C3AED" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">SUPPORT</text>
+  </g>
+  <text x="400" y="385" fill="#334155" font-family="Arial,sans-serif" font-size="15" font-weight="600" text-anchor="middle">A clear path from first idea to long-term success</text>
+</svg>

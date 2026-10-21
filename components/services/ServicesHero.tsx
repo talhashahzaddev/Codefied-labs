@@ -1,78 +1,34 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import Link from 'next/link'
+import { HiArrowRight } from 'react-icons/hi'
+import PageHero from '@/components/ui/PageHero'
 
 export default function ServicesHero() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
-
   return (
-    <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary-50 via-white to-blue-50 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl"></div>
+    <PageHero
+      badge="Complete Software Solutions"
+      title="Our Services"
+      description="With Codified Labs, you can relax and enjoy your product development journey. We professionally handle every step from project discovery to development and further support. We always care for our clients' projects as if they were ours."
+      stats={[
+        { value: '500+', label: 'Projects Completed' },
+        { value: '50+', label: 'Technologies Mastered' },
+        { value: '98%', label: 'Client Satisfaction' },
+      ]}
+      visual={{
+        src: '/images/illustrations/services-hero.svg',
+        alt: 'Isometric illustration of modular software blocks for code, analytics and mobile assembled on a shared platform',
+        width: 640,
+        height: 540,
+      }}
+    >
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Link href="/contact" className="btn-primary group">
+          Start Your Project
+          <HiArrowRight aria-hidden="true" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+        </Link>
+        <a href="#primary-services" className="btn-on-dark">
+          Browse services
+        </a>
       </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 text-sm font-medium mb-6"
-          >
-            🚀 Complete Software Solutions
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight"
-          >
-            Our <span className="gradient-text">Services</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed"
-          >
-            With Codified Labs, you can relax and enjoy your product development journey. We professionally handle every step from project discovery to development and further support. We always care for our clients' projects as if they were ours.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
-          >
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-600 mb-2">500+</div>
-              <div className="text-gray-600">Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-600 mb-2">50+</div>
-              <div className="text-gray-600">Technologies Mastered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-primary-600 mb-2">98%</div>
-              <div className="text-gray-600">Client Satisfaction</div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+    </PageHero>
   )
-} 
+}

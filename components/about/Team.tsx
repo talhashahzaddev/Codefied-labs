@@ -1,180 +1,165 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'
+import Reveal from '@/components/ui/Reveal'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 const teamMembers = [
   {
     name: 'Alex Rodriguez',
     role: 'Co-Founder & CEO',
     bio: 'Former Principal Engineer at Google with 15+ years of experience in scalable system architecture.',
-    image: '/api/placeholder/300/300',
     skills: ['System Architecture', 'Leadership', 'Strategy'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
   {
     name: 'Sarah Chen',
     role: 'Co-Founder & CTO',
     bio: 'Ex-Microsoft Engineering Manager specializing in cloud solutions and distributed systems.',
-    image: '/api/placeholder/300/300',
     skills: ['Cloud Architecture', 'DevOps', 'Team Building'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
   {
     name: 'Michael Johnson',
     role: 'Lead Full-Stack Developer',
     bio: 'Full-stack expert with deep expertise in React, Node.js, and modern web technologies.',
-    image: '/api/placeholder/300/300',
     skills: ['React', 'Node.js', 'TypeScript'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
   {
     name: 'Emily Davis',
     role: 'Senior Mobile Developer',
     bio: 'Mobile development specialist with expertise in React Native and native iOS/Android development.',
-    image: '/api/placeholder/300/300',
     skills: ['React Native', 'iOS', 'Android'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
   {
     name: 'David Kim',
     role: 'DevOps Engineer',
     bio: 'Cloud infrastructure expert specializing in AWS, Kubernetes, and automated deployment pipelines.',
-    image: '/api/placeholder/300/300',
     skills: ['AWS', 'Kubernetes', 'CI/CD'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
   {
     name: 'Lisa Wang',
     role: 'UI/UX Designer',
     bio: 'Design leader with a passion for creating intuitive and beautiful user experiences.',
-    image: '/api/placeholder/300/300',
     skills: ['UI Design', 'UX Research', 'Prototyping'],
-    social: {
-      linkedin: '#',
-      twitter: '#',
-      github: '#',
-    },
+    social: { linkedin: '#', twitter: '#', github: '#' },
   },
 ]
 
-export default function Team() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  })
+const palettes = [
+  ['#3B82F6', '#7C5CFF'],
+  ['#14B8A6', '#3B82F6'],
+  ['#7C5CFF', '#EC4899'],
+  ['#F59E0B', '#F43F5E'],
+  ['#2563EB', '#2DD4BF'],
+  ['#A78BFA', '#60A5FA'],
+]
 
+/**
+ * Abstract, non-photographic avatar: a deterministic geometric pattern with
+ * the member's initials. No portraits are shown because no real team photos
+ * were provided.
+ */
+function AbstractAvatar({ name, index }: { name: string; index: number }) {
+  const [a, b] = palettes[index % palettes.length]
+  const seed = name.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0)
+  const rot = (seed % 4) * 90
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+  const id = `av-${index}`
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+    <div className="relative h-20 w-20 shrink-0">
+      <span aria-hidden="true" className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-[22px]" style={{ background: b, opacity: 0.35 }} />
+      <svg viewBox="0 0 80 80" aria-hidden="true" className="relative h-20 w-20 overflow-hidden rounded-[22px]">
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor={a} />
+            <stop offset="1" stopColor={b} />
+          </linearGradient>
+        </defs>
+        <rect width="80" height="80" fill={`url(#${id})`} />
+        <g transform={`rotate(${rot} 40 40)`} opacity="0.35" fill="#fff">
+          <circle cx="66" cy="14" r={10 + (seed % 7)} />
+          <rect x="-8" y="52" width="44" height="44" rx="10" transform="rotate(20 14 74)" />
+        </g>
+        <text
+          x="40"
+          y="47"
+          textAnchor="middle"
+          fontSize="22"
+          fontWeight="600"
+          fill="#fff"
+          style={{ fontFamily: 'var(--font-sora), system-ui, sans-serif' }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Meet Our Team
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our diverse team of experts brings together decades of experience in software development, 
-            design, and business strategy to deliver exceptional results.
-          </p>
-        </motion.div>
+          {initials}
+        </text>
+      </svg>
+    </div>
+  )
+}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+export default function Team() {
+  return (
+    <section id="team" aria-labelledby="team-title" className="section bg-white">
+      <div className="container-page">
+        <SectionHeader
+          id="team-title"
+          title="Meet Our Team"
+          description="Our diverse team of experts brings together decades of experience in software development, design, and business strategy to deliver exceptional results."
+        />
+
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member, index) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
-            >
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-xl">
-                  {member.name.split(' ').map(n => n[0]).join('')}
+            <Reveal as="li" key={member.name} delay={(index % 3) * 0.06} className="h-full">
+              <article className="group flex h-full flex-col rounded-[28px] border border-slate-200/80 bg-white p-7 shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-lift">
+                <div className="flex items-center gap-5">
+                  <AbstractAvatar name={member.name} index={index} />
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-950">{member.name}</h3>
+                    <p className="mt-0.5 text-sm font-medium text-primary-700">{member.role}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-primary-600 font-medium mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">{member.bio}</p>
-              </div>
+                <p className="mt-6 flex-1 text-[15px] leading-7 text-slate-600">{member.bio}</p>
 
-              <div className="mb-6">
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {member.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="px-3 py-1 text-xs font-medium bg-primary-50 text-primary-600 rounded-full"
-                    >
+                <ul aria-label="Skills" className="mt-6 flex flex-wrap gap-2">
+                  {member.skills.map((skill) => (
+                    <li key={skill} className="rounded-full bg-primary-50 px-3 py-1 text-xs font-medium text-primary-700">
                       {skill}
-                    </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex gap-2 border-t border-slate-100 pt-5">
+                  {[
+                    { href: member.social.linkedin, label: 'LinkedIn', icon: FaLinkedin },
+                    { href: member.social.twitter, label: 'Twitter', icon: FaTwitter },
+                    { href: member.social.github, label: 'GitHub', icon: FaGithub },
+                  ].map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      aria-label={`${member.name} on ${s.label}`}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700"
+                    >
+                      <s.icon aria-hidden="true" className="h-4 w-4" />
+                    </a>
                   ))}
                 </div>
-              </div>
-
-              <div className="flex justify-center space-x-4">
-                <a
-                  href={member.social.linkedin}
-                  className="text-gray-400 hover:text-blue-600 transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <FaLinkedin className="h-5 w-5" />
-                </a>
-                <a
-                  href={member.social.twitter}
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                  aria-label="Twitter"
-                >
-                  <FaTwitter className="h-5 w-5" />
-                </a>
-                <a
-                  href={member.social.github}
-                  className="text-gray-400 hover:text-gray-900 transition-colors"
-                  aria-label="GitHub"
-                >
-                  <FaGithub className="h-5 w-5" />
-                </a>
-              </div>
-            </motion.div>
+              </article>
+            </Reveal>
           ))}
-        </div>
+        </ul>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <div className="inline-flex items-center space-x-4 px-6 py-3 bg-primary-50 rounded-full">
-            <span className="text-primary-600 font-medium">
-              We're growing! Join our team of innovators.
-            </span>
-          </div>
-        </motion.div>
+        <Reveal className="mt-12 flex justify-center">
+          <p className="inline-flex items-center gap-2 rounded-full bg-primary-50 px-5 py-2.5 text-sm font-medium text-primary-700">
+            <span aria-hidden="true" className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-primary-500" />
+            We&apos;re growing! Join our team of innovators.
+          </p>
+        </Reveal>
       </div>
     </section>
   )
-} 
+}

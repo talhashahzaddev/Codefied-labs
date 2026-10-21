@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="51" y1="32" x2="753" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FF"/>
+      <stop offset=".55" stop-color="#F5F3FF"/>
+      <stop offset="1" stop-color="#ECFEFF"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="271" y1="143" x2="532" y2="371" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#4338CA"/>
+    </linearGradient>
+    <filter id="shadow" x="160" y="82" width="483" height="369" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="15"/>
+      <feGaussianBlur stdDeviation="15"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.12 0 0 0 0 0.17 0 0 0 0 0.38 0 0 0 0.15 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="800" height="500" rx="28" fill="url(#bg)"/>
+  <circle cx="111" cy="105" r="48" fill="#fff" fill-opacity=".6"/>
+  <circle cx="689" cy="397" r="67" fill="#fff" fill-opacity=".6"/>
+  <path d="m242 174-66-35m66 181-66 35m382-181 66-35m-66 181 66 35M400 140V94m0 266v44" stroke="#A5B4FC" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <rect x="236" y="129" width="328" height="248" rx="20" fill="#fff"/>
+    <rect x="250" y="143" width="300" height="204" rx="12" fill="url(#screen)"/>
+    <circle cx="272" cy="162" r="4" fill="#FCA5A5"/>
+    <circle cx="286" cy="162" r="4" fill="#FCD34D"/>
+    <circle cx="300" cy="162" r="4" fill="#86EFAC"/>
+    <rect x="270" y="185" width="113" height="7" rx="3.5" fill="#BFDBFE"/>
+    <path d="m278 232 24-24 24 24m-12-12 22 22m5-19 21-19 22 22" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="270" y="278" width="83" height="6" rx="3" fill="#fff" fill-opacity=".72"/>
+    <rect x="270" y="291" width="150" height="5" rx="2.5" fill="#fff" fill-opacity=".4"/>
+    <rect x="270" y="304" width="116" height="5" rx="2.5" fill="#fff" fill-opacity=".4"/>
+    <rect x="369" y="278" width="49" height="24" rx="12" fill="#A5B4FC"/>
+    <rect x="333" y="377" width="134" height="14" rx="7" fill="#CBD5E1"/>
+    <path d="M371 391h58l17 18H354l17-18Z" fill="#94A3B8"/>
+  </g>
+  <g>
+    <rect x="90" y="119" width="134" height="73" rx="16" fill="#fff"/>
+    <rect x="103" y="132" width="28" height="28" rx="9" fill="#DBEAFE"/>
+    <path d="m111 146 5 5 9-11" stroke="#2563EB" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="140" y="137" width="68" height="6" rx="3" fill="#334155"/>
+    <rect x="140" y="150" width="48" height="5" rx="2.5" fill="#94A3B8"/>
+    <text x="103" y="179" fill="#64748B" font-family="Arial,sans-serif" font-size="10" font-weight="600">FRONTEND</text>
+  </g>
+  <g>
+    <rect x="90" y="292" width="134" height="73" rx="16" fill="#fff"/>
+    <rect x="103" y="305" width="28" height="28" rx="9" fill="#DCFCE7"/>
+    <path d="m111 319 5 5 9-11" stroke="#16A34A" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="140" y="310" width="68" height="6" rx="3" fill="#334155"/>
+    <rect x="140" y="323" width="48" height="5" rx="2.5" fill="#94A3B8"/>
+    <text x="103" y="352" fill="#64748B" font-family="Arial,sans-serif" font-size="10" font-weight="600">BACKEND</text>
+  </g>
+  <g>
+    <rect x="576" y="119" width="134" height="73" rx="16" fill="#fff"/>
+    <rect x="589" y="132" width="28" height="28" rx="9" fill="#FFEDD5"/>
+    <path d="M603 139v14m-6-7h12" stroke="#EA580C" stroke-width="2.3" stroke-linecap="round"/>
+    <rect x="626" y="137" width="68" height="6" rx="3" fill="#334155"/>
+    <rect x="626" y="150" width="48" height="5" rx="2.5" fill="#94A3B8"/>
+    <text x="589" y="179" fill="#64748B" font-family="Arial,sans-serif" font-size="10" font-weight="600">CLOUD &amp; DEVOPS</text>
+  </g>
+  <g>
+    <rect x="576" y="292" width="134" height="73" rx="16" fill="#fff"/>
+    <rect x="589" y="305" width="28" height="28" rx="9" fill="#EDE9FE"/>
+    <ellipse cx="603" cy="314" rx="7" ry="3" stroke="#7C3AED" stroke-width="1.7"/>
+    <path d="M596 314v9c0 2 3 4 7 4s7-2 7-4v-9m-14 5c0 2 3 4 7 4s7-2 7-4" stroke="#7C3AED" stroke-width="1.7"/>
+    <rect x="626" y="310" width="68" height="6" rx="3" fill="#334155"/>
+    <rect x="626" y="323" width="48" height="5" rx="2.5" fill="#94A3B8"/>
+    <text x="589" y="352" fill="#64748B" font-family="Arial,sans-serif" font-size="10" font-weight="600">DATA &amp; AI</text>
+  </g>
+  <text x="400" y="448" fill="#334155" font-family="Arial,sans-serif" font-size="15" font-weight="600" text-anchor="middle">The right tools for every layer of your product</text>
+</svg>
