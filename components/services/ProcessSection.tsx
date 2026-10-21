@@ -46,7 +46,7 @@ export default function ProcessSection() {
             const a = accents[index]
             const right = index % 2 === 1
             return (
-              <li key={step.title} className="relative pb-10 pl-20 last:pb-0 md:grid md:grid-cols-2 md:gap-20 md:pb-0 md:pl-0 md:[&:not(:first-child)]:-mt-24">
+              <li key={step.title} className="relative pb-10 pl-20 last:pb-0 md:grid md:grid-cols-2 md:gap-20 md:pb-10 md:last:pb-0 md:pl-0">
                 {/* Node */}
                 <span
                   aria-hidden="true"
